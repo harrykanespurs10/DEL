@@ -1,0 +1,25 @@
+import numpy as np
+import pandas as pd
+
+def unitStep(v):
+    if v > 0: 
+        return 1 
+    else: 
+        return 0
+
+def perceptronModel(x, w, b):
+    v = np.dot(w, x) + b 
+    y = unitStep(v)
+    return y 
+
+def AND_logicFunction(x):
+    w = np.array([1, 1])
+    b = -1.5
+    return perceptronModel(x, w, b)
+
+data = pd.read_csv('inputs.csv')
+
+for index, row in data.iterrows():
+    x = np.array([row['input1'], row['input2']])
+    result = AND_logicFunction(x)
+    print("AND({}, {}) = {}".format(row['input1'], row['input2'], result))
